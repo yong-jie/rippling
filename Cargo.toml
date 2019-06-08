@@ -6,7 +6,7 @@ license = "MIT/Apache-2.0"
 description = "Audio playback library"
 keywords = ["audio", "playback"]
 repository = "https://github.com/yong-jie/rippling"
-edition = "2019"
+edition = "2018"
 
 [dependencies]
 rodio = { git = "https://github.com/yong-jie/rodio", branch = "master" }
