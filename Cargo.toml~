@@ -1,0 +1,7 @@
+[package]
+name = "rippling"
+version = "0.1.0"
+authors = ["yong-jie <viorama@gmail.com>"]
+edition = "2018"
+
+[dependencies]
