@@ -20,14 +20,12 @@ pub fn play_music(filename: &str) -> audio::Music {
 /// Uses default device.
 pub fn get_music(filename: &str) -> audio::Music {
     let device = rodio::default_output_device().unwrap();
-    let sink = rodio::Sink::new(&device);
     let sound_data = sound_data::SoundData::load(filename).unwrap();
-    audio::Music::new(sink, sound_data)
+    audio::Music::new(&device, sound_data)
 }
 
-/// Get a stopped music from filename, using specified Device.
+/// Get a stopped music from filename, using the specified Device.
 pub fn get_music_with_device(filename: &str, device: &Device) -> audio::Music {
-    let sink = rodio::Sink::new(&device);
     let sound_data = sound_data::SoundData::load(filename).unwrap();
-    audio::Music::new(sink, sound_data)
+    audio::Music::new(&device, sound_data)
 }

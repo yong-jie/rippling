@@ -1,5 +1,5 @@
 
-use rodio::Sink;
+use rodio::{Device, Sink};
 use crate::sound_data;
 
 /// A playable audio.
@@ -11,6 +11,11 @@ pub trait Audio {
 /// This means that `play()` should only work when
 /// the music is not currently playing.
 pub struct Music {
+    // We store a Device so we can rebuild Sinks to
+    // implement stopping. Sinks need to be rebuilt
+    // because rodio's stop function actually renders
+    // sinks unusable.
+    device: Device,
     sink: Sink,
     sound_data: sound_data::SoundData
 }
@@ -18,10 +23,11 @@ pub struct Music {
 impl Music {
     /// Music is by default not started during instantiation.
     pub fn new(
-        sink: Sink,
+        device: &Device,
         sound_data: sound_data::SoundData) -> Music {
         Music {
-            sink,
+            device: device.to_owned(),
+            sink: Sink::new(&device),
             sound_data
         }
     }
