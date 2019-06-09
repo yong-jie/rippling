@@ -29,7 +29,12 @@ impl Music {
 
 impl Audio for Music {
     fn play(&self) {
-        self.sink.append(self.sound_data.decoder());
+        if self.sink.empty() {
+            // This is the first time playing.
+            self.sink.append(self.sound_data.decoder());
+        } else if self.sink.is_paused() {
+            self.sink.play();
+        }
     }
 }
 
