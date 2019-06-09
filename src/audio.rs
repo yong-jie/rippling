@@ -40,6 +40,11 @@ impl Music {
     pub fn pause(&self) {
         self.sink.pause();
     }
+
+    pub fn stop(&mut self) {
+        self.sink = Sink::new(&self.device);
+        self.duration = Arc::new(Mutex::new(Duration::from_secs(0)));
+    }
 }
 
 impl Audio for Music {
