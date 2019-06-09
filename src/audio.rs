@@ -37,7 +37,7 @@ impl Music {
         }
     }
 
-    fn pause(&self) {
+    pub fn pause(&self) {
         self.sink.pause();
     }
 }
