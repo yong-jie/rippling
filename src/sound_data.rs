@@ -4,8 +4,14 @@ use std::fs::File;
 use std::io::{Cursor, Read, Result};
 use std::sync::Arc;
 
+/// This abstraction exists because a rodio sink requires a new Decoder
+/// object to be fed into it whenever an audio is played. Creating a
+/// normal decoder with fresh new binary sound data is extremely
+/// IO-inefficient, and as such we load the sound file into a buffer
+/// first use cursors to generate new Decoder objects for the sink.
 pub struct SoundData(Arc<Vec<u8>>);
 
+/// For use with io::Cursor.
 impl AsRef<[u8]> for SoundData {
     fn as_ref(&self) -> &[u8] {
         &self.0
