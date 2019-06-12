@@ -37,10 +37,13 @@ impl Music {
         }
     }
 
+    /// Pauses the Music. Can be resumed with play().
     pub fn pause(&self) {
         self.sink.pause();
     }
 
+    /// Stops the Music. Subsequent calls to play() will
+    /// start the Music from scratch.
     pub fn stop(&mut self) {
         self.sink = Sink::new(&self.device);
         self.duration = Arc::new(Mutex::new(Duration::from_secs(0)));
